@@ -10,6 +10,9 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 
+import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import me.blueyescat.skriptlogs.util.LogEvt;
 
 /**
@@ -19,9 +22,9 @@ public class EvtLog extends SkriptEvent {
 
 	static {
 		Skript.registerEvent("Log", EvtLog.class, LogEvt.class, "[console] log")
-				.description("Called when a message is logged.")
+				.description("This is called when a message is sent in console. Note that using broadcast on the on log event will infinitely loop.")
 				.examples("on log:")
-				.since("0.1.0");
+				.since("0.0.1");
 		EventValues.registerEventValue(LogEvt.class, String.class, new Getter<String, LogEvt>() {
 			@Override
 			public String get(LogEvt e) {

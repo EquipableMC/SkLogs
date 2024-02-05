@@ -21,12 +21,15 @@ public class LogAppender extends AbstractAppender {
 	public void append(LogEvent e) {
 		if (!SkriptLogs.getInstance().isEnabled())
 			return;
-		LogEvt logEvent = new LogEvt(e, e.getMessage());
+		LogEvt logEvent = new LogEvt(e.toImmutable(), e.getMessage());
 		new BukkitRunnable() {
 			public void run() {
-				Bukkit.getServer().getPluginManager().callEvent(logEvent);
+				if (!e.getMessage().getFormattedMessage().trim().equals("")) {
+					Bukkit.getServer().getPluginManager().callEvent(logEvent);
+				}	
 			}
 		}.runTask(SkriptLogs.getInstance());
 	}
 
 }
+

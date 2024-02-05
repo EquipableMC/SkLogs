@@ -46,11 +46,6 @@ public class Types {
 						return o.name();
 					}
 
-					@Override
-					public String getVariableNamePattern() {
-						return "\\S+";
-					}
-
 				}));
 
 		// Log levels have a type just for enum values. They should act like strings.

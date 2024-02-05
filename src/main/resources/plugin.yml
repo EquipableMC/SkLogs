@@ -1,11 +1,11 @@
-name: skript-logs
-description: An addon to listen to log messages in Skript. And more!
+name: SkLogs
+description: An updated fork of Skript-logs
 version: @version@
 
-author: Blueyescat
-website: https://github.com/Blueyescat/skript-logs
+author: Equipable
+website: https://github.com/EquipableMC/SkLogs
 
 depend: [Skript]
 
 main: me.blueyescat.skriptlogs.SkriptLogs
-api-version: 1.14
+api-version: 1.13
