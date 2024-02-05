@@ -26,7 +26,7 @@ import me.blueyescat.skriptlogs.util.LogEvt;
 		"In this case the logged message won't contain this '[Plugin]' prefix. " +
 		"So you can check if the logger name is a valid plugin somehow and merge it with the logged message."})
 @Examples({"set {_loggerName} to the logger name"})
-@Since("0.1.0")
+@Since("1.0.0")
 public class ExprLoggerName extends SimpleExpression<String> {
 
 	static {

@@ -24,7 +24,7 @@ import me.blueyescat.skriptlogs.util.LogEvt;
 @Name("Log Level")
 @Description("Returns the level of the message in a log event.")
 @Examples({"if the log level is error:"})
-@Since("0.1.0")
+@Since("1.0.0")
 public class ExprLogLevel extends SimpleExpression<StandardLevel> {
 
 	static {

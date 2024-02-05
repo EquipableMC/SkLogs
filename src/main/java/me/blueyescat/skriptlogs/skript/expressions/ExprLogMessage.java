@@ -24,7 +24,7 @@ import me.blueyescat.skriptlogs.util.LogEvt;
 @Name("Logged Message")
 @Description("Returns the logged message in a log event.")
 @Examples({"set {_message} to the logged message"})
-@Since("0.1.0")
+@Since("1.0.0")
 public class ExprLogMessage extends SimpleExpression<String> {
 
 	static {

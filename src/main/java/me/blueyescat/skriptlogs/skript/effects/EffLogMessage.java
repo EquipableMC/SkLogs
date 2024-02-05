@@ -26,7 +26,7 @@ import ch.njol.util.Kleenean;
 		"log errors \"test\" and \"error\"",
 		"send a fatal error \"test\" to the console",
 		"print in \"test\""})
-@Since("0.1.0")
+@Since("1.0.0")
 public class EffLogMessage extends Effect {
 
 	static {

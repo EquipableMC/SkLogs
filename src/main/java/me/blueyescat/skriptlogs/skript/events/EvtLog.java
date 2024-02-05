@@ -24,7 +24,7 @@ public class EvtLog extends SkriptEvent {
 		Skript.registerEvent("Log", EvtLog.class, LogEvt.class, "[console] log")
 				.description("This is called when a message is sent in console. Note that using broadcast on the on log event will infinitely loop.")
 				.examples("on log:")
-				.since("0.0.1");
+				.since("1.0.0");
 		EventValues.registerEventValue(LogEvt.class, String.class, new Getter<String, LogEvt>() {
 			@Override
 			public String get(LogEvt e) {
