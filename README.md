@@ -1,5 +1,5 @@
 # skript-logs
-An addon to listen to log messages in Skript. And more!
+A updated version of Skript-logs. This adds the ability to listen to log messages in Skript, and more!
 
 ### Relevant Links
 - Documentation - [Click Here](https://skripthub.net/docs/?addon=skript-logs)
