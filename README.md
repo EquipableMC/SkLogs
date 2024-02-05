@@ -2,11 +2,11 @@
 An addon to listen to log messages in Skript. And more!
 
 ### Relevant Links
-- Documentation - Coming Soon
-- [Examples](https://github.com/Blueyescat/skript-logs/wiki/Examples)
-- [Releases](https://github.com/EquipableMC/SkLogs/releases)
+- Documentation - [Click Here](https://skripthub.net/docs/?addon=skript-logs)
+- Issues - [Click Here](https://github.com/EquipableMC/SkLogs)
+- Releases - [Click Here](https://github.com/EquipableMC/SkLogs/releases)
 - bStats - Coming Soon
 
 #### Discord
 - equipable
-- SkriptLang (Skript) Discord- https://discord.gg/skript
+- SkriptLang (Skript) Discord - [Click Here](https://discord.gg/skript)
