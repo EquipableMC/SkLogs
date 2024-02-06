@@ -42,7 +42,7 @@ public class ExprLogMessage extends SimpleExpression<String> {
 
 	@Override
 	protected String[] get(final Event e) {
-		return CollectionUtils.array(((LogEvt) e).getLogEvent().getMessage().getFormattedMessage());
+		return CollectionUtils.array(((LogEvt) e).getLogEvent().getMessage().getFormattedMessage().replaceAll("\\u001B\\[[;\\d]*m", ""));
 	}
 
 	@Override
