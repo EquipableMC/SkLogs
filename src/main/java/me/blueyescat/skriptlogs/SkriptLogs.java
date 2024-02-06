@@ -8,7 +8,8 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 
 import me.blueyescat.skriptlogs.util.LogAppender;
-import me.blueyescat.skriptlogs.util.Metrics;
+
+import org.bstats.bukkit.Metrics;
 
 public class SkriptLogs extends JavaPlugin {
 
