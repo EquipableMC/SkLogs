@@ -3,7 +3,7 @@ A updated version of Skript-logs. This adds the ability to listen to log message
 
 ### Relevant Links
 - Documentation - [Click Here](https://skripthub.net/docs/?addon=skript-logs)
-- Issues - [Click Here](https://github.com/EquipableMC/SkLogs)
+- Issues - [Click Here](https://github.com/EquipableMC/SkLogs/issues)
 - Releases - [Click Here](https://github.com/EquipableMC/SkLogs/releases)
 - bStats - Coming Soon
 
