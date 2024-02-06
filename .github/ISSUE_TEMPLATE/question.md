@@ -1,6 +1,6 @@
 ---
 name: Question
-about: Ask something related to skript-logs
+about: Ask something related to SkLogs
 
 ---
 

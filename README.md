@@ -1,4 +1,4 @@
-# skript-logs
+# SkLogs
 A updated version of Skript-logs. This adds the ability to listen to log messages in Skript, and more!
 
 ### Relevant Links

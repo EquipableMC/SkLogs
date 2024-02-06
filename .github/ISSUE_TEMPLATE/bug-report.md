@@ -24,11 +24,12 @@ about: Create a report to help us improve
 **Server Information**
 * Server Platform:
 * Skript:
-* skript-logs:
+* SkLogs Version:
 * Bukkit:
 * Minecraft:
 * Java:
 * Operating System:
+* Other Skript Addons:
 
 **Additional Context**
 *Add any other context about the problem here.*

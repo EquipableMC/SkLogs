@@ -1,6 +1,6 @@
 ---
 name: Suggestion
-about: Suggest something for skript-logs
+about: Suggest something for SkLogs
 
 ---
 

@@ -27,7 +27,7 @@ public class SkriptLogs extends JavaPlugin {
 	public void onEnable() {
 		if (!Skript.isAcceptRegistrations()) {
 			getServer().getPluginManager().disablePlugin(this);
-			getLogger().severe("skript-logs can't be loaded when the server is already loaded! Plugin is disabled.");
+			getLogger().severe("SkLogs can't be loaded when the server is already loaded! Plugin is disabled.");
 			return;
 		}
 
@@ -40,7 +40,7 @@ public class SkriptLogs extends JavaPlugin {
 
 		new LogAppender().start();
 
-		Metrics metrics = new Metrics(getInstance());
+		Metrics metrics = new Metrics(this, 20924);
 		metrics.addCustomChart(new Metrics.SimplePie("skript_version", () ->
 				Skript.getInstance().getDescription().getVersion()));
 		getLogger().info("Started metrics!");
