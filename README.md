@@ -7,6 +7,6 @@ A updated version of Skript-logs. This adds the ability to listen to log message
 - Releases - [Click Here](https://github.com/EquipableMC/SkLogs/releases)
 - bStats - Coming Soon
 
-#### Discord
+### Discord
 - equipable
 - SkriptLang (Skript) Discord - [Click Here](https://discord.gg/skript)
