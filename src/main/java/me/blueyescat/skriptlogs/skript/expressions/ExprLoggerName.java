@@ -18,7 +18,7 @@ import ch.njol.util.coll.CollectionUtils;
 import me.blueyescat.skriptlogs.util.LogEvt;
 
 /**
- * @author Blueyescat
+ * @author EquipableMC
  */
 @Name("Logger Name")
 @Description({"Returns the name of the logger in a log event. None if the logger name doesn't exist.",

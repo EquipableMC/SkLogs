@@ -16,7 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import me.blueyescat.skriptlogs.util.LogEvt;
 
 /**
- * @author Blueyescat
+ * @author EquipableMC
  */
 public class EvtLog extends SkriptEvent {
 
