@@ -8,7 +8,7 @@ An updated version of Skript-logs. This adds the ability to listen to log messag
 
 # Discord
 - equipable
-- SkriptLang (Skript) Discord - [Click Here](https://discord.gg/skript)
+- SkUnity (Skript) Discord - [Click Here](https://discord.gg/skript)
 
 # Documentation
 
