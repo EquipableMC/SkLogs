@@ -3,6 +3,7 @@ package me.blueyescat.skriptlogs.skript.expressions;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
+import ch.njol.skript.ScriptLoader;
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -15,22 +16,21 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 
+import me.blueyescat.skriptlogs.SkriptLogs;
+
 import me.blueyescat.skriptlogs.util.LogEvt;
 
 /**
- * @author EquipableMC
+ * 
  */
-@Name("Logger Name")
-@Description({"Returns the name of the logger in a log event. None if the logger name doesn't exist.",
-		"If a plugin logs a message using its plugin logger this will be name of the plugin. i.e. '[<Plugin>] <message>'.",
-		"In this case the logged message won't contain this '[Plugin]' prefix. " +
-		"So you can check if the logger name is a valid plugin somehow and merge it with the logged message."})
-@Examples({"set {_loggerName} to the logger name"})
-@Since("1.0.0")
-public class ExprLoggerName extends SimpleExpression<String> {
+@Name("Last Logged Message")
+@Description("Returns the last logged message")
+@Examples({"set {_message} to the last logged message"})
+@Since("1.1.0")
+public class ExprLastLogMessage extends SimpleExpression<String> {
 
 	static {
-		Skript.registerExpression(ExprLoggerName.class, String.class, ExpressionType.SIMPLE, "[the] logger name");
+		Skript.registerExpression(ExprLastLogMessage.class, String.class, ExpressionType.SIMPLE, "[the] last log[ged] message");
 	}
 
 	@Override
@@ -40,10 +40,7 @@ public class ExprLoggerName extends SimpleExpression<String> {
 
 	@Override
 	protected String[] get(final Event e) {
-		String name = ((LogEvt) e).getLogEvent().getLoggerName();
-		if (name.isEmpty())
-			return null;
-		return CollectionUtils.array(name);
+		return new String[] { SkriptLogs.getInstance().lastMessage };
 	}
 
 	@Override
@@ -58,7 +55,7 @@ public class ExprLoggerName extends SimpleExpression<String> {
 
 	@Override
 	public String toString(final @Nullable Event e, final boolean debug) {
-		return "logged message";
+		return "the last logged message";
 	}
 
 }

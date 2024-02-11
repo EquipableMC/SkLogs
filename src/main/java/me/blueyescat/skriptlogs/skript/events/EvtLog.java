@@ -16,7 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import me.blueyescat.skriptlogs.util.LogEvt;
 
 /**
- * @author EquipableMC
+ * 
  */
 public class EvtLog extends SkriptEvent {
 
@@ -25,12 +25,6 @@ public class EvtLog extends SkriptEvent {
 				.description("This is called when a message is sent in console. Note that using broadcast on the on log event will infinitely loop.")
 				.examples("on log:")
 				.since("1.0.0");
-		EventValues.registerEventValue(LogEvt.class, String.class, new Getter<String, LogEvt>() {
-			@Override
-			public String get(LogEvt e) {
-				return e.getLogEvent().getMessage().getFormattedMessage();
-			}
-		}, 0);
 	}
 
 	@Override
@@ -45,7 +39,7 @@ public class EvtLog extends SkriptEvent {
 
 	@Override
 	public String toString(final @Nullable Event e, final boolean debug) {
-		return "log";
+		return "on log";
 	}
 
 }

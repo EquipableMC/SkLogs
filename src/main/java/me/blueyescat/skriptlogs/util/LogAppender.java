@@ -22,9 +22,11 @@ public class LogAppender extends AbstractAppender {
 		if (!SkriptLogs.getInstance().isEnabled())
 			return;
 		LogEvt logEvent = new LogEvt(e.toImmutable(), e.getMessage());
+		var immutableEvent = e.toImmutable();
 		new BukkitRunnable() {
 			public void run() {
 				if (!e.getMessage().getFormattedMessage().trim().equals("")) {
+					SkriptLogs.getInstance().lastMessage = immutableEvent.getMessage().getFormattedMessage().replaceAll("\\u001B\\[[;\\d]*m", "");
 					Bukkit.getServer().getPluginManager().callEvent(logEvent);
 				}	
 			}

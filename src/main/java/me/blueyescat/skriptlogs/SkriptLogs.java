@@ -14,6 +14,7 @@ public class SkriptLogs extends JavaPlugin {
 
 	private static SkriptLogs instance;
 	private static SkriptAddon addonInstance;
+	public String lastMessage;
 
 	public SkriptLogs() {
 		if (instance == null) {

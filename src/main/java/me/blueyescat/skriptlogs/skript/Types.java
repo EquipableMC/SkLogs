@@ -13,7 +13,7 @@ import ch.njol.skript.registrations.Converters;
 import ch.njol.skript.util.EnumUtils;
 
 /**
- * @author EquipableMC
+ * 
  */
 public class Types {
 
@@ -25,7 +25,7 @@ public class Types {
 				.description("")
 				.usage("info, warning, error, fatal, trace, debug, off, all")
 				.examples("")
-				.since("0.1.0")
+				.since("1.0.0")
 				.defaultExpression(new EventValueExpression<>(StandardLevel.class))
 				.parser(new Parser<StandardLevel>() {
 
