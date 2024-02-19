@@ -19,6 +19,11 @@ import java.net.URL;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
+
+/**
+ * @author jakegblp, Equipable
+ */
+
 public class UpdateChecker implements Listener {
 
 	private static Version UPDATE_VERSION;
