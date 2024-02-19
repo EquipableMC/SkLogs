@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 
 
 /**
- * @author jakegblp, Equipable
+ * @author ShaneBeee, Equipable
  */
 
 public class UpdateChecker implements Listener {
