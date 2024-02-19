@@ -9,6 +9,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import me.blueyescat.skriptlogs.SkriptLogs;
 
+/**
+ * @author Blueyescat, Equipable
+ */
 public class LogAppender extends AbstractAppender {
 
 	public LogAppender() {

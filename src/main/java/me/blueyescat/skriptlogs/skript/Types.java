@@ -13,7 +13,7 @@ import ch.njol.skript.registrations.Converters;
 import ch.njol.skript.util.EnumUtils;
 
 /**
- * 
+ * @author Blueyescat, Equipable
  */
 public class Types {
 

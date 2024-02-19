@@ -19,7 +19,7 @@ import ch.njol.util.coll.CollectionUtils;
 import me.blueyescat.skriptlogs.util.LogEvt;
 
 /**
- * 
+ * @author Blueyescat, Equipable
  */
 @Name("Logged Message")
 @Description("Returns the logged message in a log event.")

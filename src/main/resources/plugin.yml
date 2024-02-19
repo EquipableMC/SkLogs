@@ -2,7 +2,7 @@ name: SkLogs
 description: An updated fork of Skript-logs
 version: @version@
 
-author: Equipable
+author: Equipable, Blueyescat 
 website: https://github.com/EquipableMC/SkLogs
 
 depend: [Skript]

@@ -21,7 +21,7 @@ import me.blueyescat.skriptlogs.SkriptLogs;
 import me.blueyescat.skriptlogs.util.LogEvt;
 
 /**
- * 
+ * @author Blueyescat, Equipable
  */
 @Name("Last Logged Message")
 @Description("Returns the last logged message")

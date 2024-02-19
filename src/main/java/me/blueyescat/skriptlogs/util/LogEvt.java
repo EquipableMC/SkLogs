@@ -6,7 +6,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 /**
- * 
+ * @author Blueyescat, Equipable
  */
 public class LogEvt extends Event {
 
