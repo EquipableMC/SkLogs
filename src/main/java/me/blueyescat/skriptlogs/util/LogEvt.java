@@ -30,4 +30,7 @@ public class LogEvt extends Event {
 		return handlers;
 	}
 
+    public long getTimeMillis() {
+		return System.currentTimeMillis();
+	}
 }

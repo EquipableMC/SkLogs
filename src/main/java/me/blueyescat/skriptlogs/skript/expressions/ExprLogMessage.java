@@ -1,5 +1,10 @@
 package me.blueyescat.skriptlogs.skript.expressions;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -34,15 +39,33 @@ public class ExprLogMessage extends SimpleExpression<String> {
 	@Override
 	public boolean init(final Expression<?>[] exprs, final int matchedPattern, final Kleenean isDelayed, final ParseResult parseResult) {
 		if (!ScriptLoader.isCurrentEvent(LogEvt.class)) {
-			Skript.error("The logged message expression can't be used outside of a log event");
+			Skript.error("The logged message expression can't be used outside of an on log event! Use last logged message if you want to use logged messages outside of an on log event!");
 			return false;
 		}
 		return true;
 	}
+	private String CleanedUpMsg(String msg) {
+		return msg.replaceAll("\\s*§[0-9A-Fa-fKkLlMmNnOoRrXx]\\s*", "");
+	}
 
 	@Override
 	protected String[] get(final Event e) {
-		return CollectionUtils.array(((LogEvt) e).getLogEvent().getMessage().getFormattedMessage().replaceAll("\\u001B\\[[;\\d]*m", ""));
+		LogEvt event = (LogEvt) e;
+		long timestampMillis;
+		timestampMillis = event.getTimeMillis();
+		LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestampMillis), ZoneId.systemDefault());
+		String formattedtime = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(dateTime);
+		String logname = ((LogEvt) e).getLogEvent().getLoggerName();
+		String formattedmsg = ((LogEvt) e).getLogEvent().getMessage().getFormattedMessage();
+		String cleanedmsg = CleanedUpMsg(formattedmsg);
+		String logmsg = new StringBuilder()
+			.append("[").append(formattedtime).append("] ")
+			.append("[").append(logname).append("] ")
+			.append(cleanedmsg)
+			.toString();
+		if (logmsg.isBlank())
+			return null;
+		return CollectionUtils.array(logmsg);
 	}
 
 	@Override

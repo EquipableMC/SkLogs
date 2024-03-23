@@ -18,7 +18,7 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 
 /**
- * @author Blueyescat, Equipable
+ * @author Blueyescat
  */
 @Name("Log Message")
 @Description({"Logs a message with the given log level. The last pattern uses 'info' level."})

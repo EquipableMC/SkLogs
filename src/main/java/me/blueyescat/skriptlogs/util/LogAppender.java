@@ -27,11 +27,10 @@ public class LogAppender extends AbstractAppender {
 		LogEvt logEvent = new LogEvt(e.toImmutable(), e.getMessage());
 		var immutableEvent = e.toImmutable();
 		new BukkitRunnable() {
+			@Override
 			public void run() {
-				if (!e.getMessage().getFormattedMessage().trim().equals("")) {
-					SkriptLogs.getInstance().lastMessage = immutableEvent.getMessage().getFormattedMessage().replaceAll("\\u001B\\[[;\\d]*m", "");
-					Bukkit.getServer().getPluginManager().callEvent(logEvent);
-				}	
+				Bukkit.getServer().getPluginManager().callEvent(logEvent);
+				SkriptLogs.getInstance().lastMessage = immutableEvent.getMessage().getFormattedMessage();
 			}
 		}.runTask(SkriptLogs.getInstance());
 	}

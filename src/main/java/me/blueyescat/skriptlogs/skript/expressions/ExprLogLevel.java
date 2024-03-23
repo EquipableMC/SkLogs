@@ -19,7 +19,7 @@ import ch.njol.util.coll.CollectionUtils;
 import me.blueyescat.skriptlogs.util.LogEvt;
 
 /**
- * @author Blueyescat, Equipable
+ * @author Blueyescat
  */
 @Name("Log Level")
 @Description("Returns the level of the message in a log event.")
