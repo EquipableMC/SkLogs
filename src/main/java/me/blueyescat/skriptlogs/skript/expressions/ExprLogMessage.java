@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -63,6 +66,13 @@ public class ExprLogMessage extends SimpleExpression<String> {
 			.append("[").append(logname).append("] ")
 			.append(cleanedmsg)
 			.toString();
+		if (Bukkit.getPluginManager().isPluginEnabled("Disky")) {
+			if (logmsg.length() >= 2000) {
+				System.out.println("§cCould not log this" + logname + "§c's message as it exceeds 2000 characters! (Prevents a server crash if using with DiSky!)");
+				return null;
+			}
+		}
+
 		if (logmsg.isBlank())
 			return null;
 		return CollectionUtils.array(logmsg);
