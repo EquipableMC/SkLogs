@@ -1,11 +1,8 @@
 name: SkLogs
-description: An updated fork of Skript-logs
-version: @version@
-
-author: Equipable, Blueyescat 
-website: https://github.com/EquipableMC/SkLogs
-
-depend: [Skript]
-
 main: me.blueyescat.skriptlogs.SkriptLogs
+description: An updated fork of Skript-logs
 api-version: 1.13
+version: @version@
+author: [ ImNotStable, Equipable, Blueyescat ]
+depend: [ Skript ]
+website: https://github.com/EquipableMC/SkLogs
