@@ -2,6 +2,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
   id 'java'
+  id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'me.blueyescat.skriptlogs'
@@ -32,8 +33,13 @@ dependencies {
     compileOnly 'org.apache.logging.log4j:log4j-core:2.22.1'
     compileOnly 'org.apache.logging.log4j:log4j-api:2.22.1'
     compileOnly 'org.eclipse.jdt:org.eclipse.jdt.annotation:2.2.800'
+    compileOnly 'org.bstats:bstats-bukkit:3.0.2'
 }
 
 jar {
     archiveBaseName = "sklogs"
+}
+
+shadowJar {
+    relocate 'org.bstats', 'me.blueyescat.skriptlogs.bstats'
 }
