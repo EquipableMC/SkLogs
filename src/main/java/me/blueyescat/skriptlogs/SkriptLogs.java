@@ -2,9 +2,10 @@ package me.blueyescat.skriptlogs;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
+import ch.njol.skript.bstats.bukkit.Metrics;
+import ch.njol.skript.bstats.charts.SimplePie;
 import me.blueyescat.skriptlogs.util.LogAppender;
-import org.bstats.bukkit.Metrics;
-import org.bstats.charts.SimplePie;
+import me.blueyescat.skriptlogs.util.UpdateChecker;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -56,9 +57,10 @@ public class SkriptLogs extends JavaPlugin {
     
     Metrics metrics = new Metrics(this, 20924);
     metrics.addCustomChart(new SimplePie("skript_version", () ->
-      Skript.getInstance().getDescription().getVersion()));
+      Skript.getInstance().getPluginMeta().getVersion()));
     getLogger().info("Started metrics!");
     getLogger().info("Finished loading!");
+    UpdateChecker.check(this);
   }
   
 }
