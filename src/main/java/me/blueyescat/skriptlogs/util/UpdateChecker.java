@@ -4,6 +4,7 @@ import ch.njol.skript.util.Version;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import me.blueyescat.skriptlogs.SkriptLogs;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +26,7 @@ public class UpdateChecker {
     String latestVersion = getLatestVersion();
     if (latestVersion == null)
       return;
-    String currentVersion = plugin.getPluginMeta().getVersion();
+    String currentVersion = plugin.getDescription().getVersion();
     if (new Version(currentVersion).isSmallerThan(new Version(latestVersion))) {
       SkriptLogs.getInstance().getLogger().info("SkLogs is NOT up to date!");
       SkriptLogs.getInstance().getLogger().info("> Current Version: " + currentVersion);
@@ -37,11 +38,11 @@ public class UpdateChecker {
           Player player = event.getPlayer();
           if (!player.hasPermission("sklogs.update.check") && !player.isOp()) return;
           
-          player.sendRichMessage(" ");
-          player.sendRichMessage("<red>[<white>SkLogs<red>] <white>SkLogs is <red><bold>OUTDATED<white>!");
-          player.sendRichMessage("<red>[<white>SkLogs<red>] <white>New version: " + latestVersion);
-          player.sendRichMessage("<red>[<white>SkLogs<red>] <white>Download at: <link>https://github.com/EquipableMC/SkLogs/releases");
-          player.sendRichMessage(" ");
+          player.sendMessage(" ");
+          player.sendMessage(MiniMessage.miniMessage().deserialize("<red>[<white>SkLogs<red>] <white>SkLogs is <red><bold>OUTDATED<white>!"));
+          player.sendMessage(MiniMessage.miniMessage().deserialize("<red>[<white>SkLogs<red>] <white>New version: " + latestVersion));
+          player.sendMessage(MiniMessage.miniMessage().deserialize("<red>[<white>SkLogs<red>] <white>Download at: <link>https://github.com/EquipableMC/SkLogs/releases"));
+          player.sendMessage(" ");
         }
       }, plugin);
     } else

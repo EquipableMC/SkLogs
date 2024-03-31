@@ -61,12 +61,6 @@ public class ExprLogMessage extends SimpleExpression<String> {
     String logmsg = "[" + formattedtime + "] " +
       "[" + logname + "] " +
       cleanedmsg;
-    if (Bukkit.getPluginManager().isPluginEnabled("Disky")) {
-      if (logmsg.length() >= 2000) {
-        System.out.println("§cCould not log this" + logname + "§c's message as it exceeds 2000 characters! (Prevents a server crash if using with DiSky!)");
-        throw new IllegalArgumentException("Message exceeds 2000 characters!");
-      }
-    }
     
 		if (logmsg.isBlank())
 			return new String[]{};

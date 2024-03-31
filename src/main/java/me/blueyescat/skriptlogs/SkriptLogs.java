@@ -57,7 +57,7 @@ public class SkriptLogs extends JavaPlugin {
     
     Metrics metrics = new Metrics(this, 20924);
     metrics.addCustomChart(new SimplePie("skript_version", () ->
-      Skript.getInstance().getPluginMeta().getVersion()));
+      Skript.getInstance().getDescription().getVersion()));
     getLogger().info("Started metrics!");
     getLogger().info("Finished loading!");
     UpdateChecker.check(this);
