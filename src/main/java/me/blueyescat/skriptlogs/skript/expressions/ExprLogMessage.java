@@ -12,15 +12,9 @@ import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
 import me.blueyescat.skriptlogs.util.LogEvt;
-import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 
 /**
  * @author Blueyescat, Equipable
@@ -36,7 +30,7 @@ public class ExprLogMessage extends SimpleExpression<String> {
   }
   
   @Override
-  public boolean init(final Expression<?> @NotNull [] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, final @NotNull ParseResult parseResult) {
+  public boolean init(final Expression<?>[] exprs, final int matchedPattern, final Kleenean isDelayed, final ParseResult parseResult) {
     if (!getParser().isCurrentEvent(LogEvt.class)) {
       Skript.error("The logged message expression can't be used outside of an on log event! Use last logged message if you want to use logged messages outside of an on log event!");
       return false;
@@ -44,28 +38,9 @@ public class ExprLogMessage extends SimpleExpression<String> {
     return true;
   }
   
-  private String CleanedUpMsg(String msg) {
-    return msg.replaceAll("\\s*§[0-9A-Fa-fKkLlMmNnOoRrXx]\\s*", "");
-  }
-  
   @Override
-  protected String @NotNull [] get(final @NotNull Event e) {
-    LogEvt event = (LogEvt) e;
-    long timestampMillis;
-    timestampMillis = event.getTimeMillis();
-    LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestampMillis), ZoneId.systemDefault());
-    String formattedtime = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(dateTime);
-    String logname = ((LogEvt) e).getLogEvent().getLoggerName();
-    String formattedmsg = ((LogEvt) e).getLogEvent().getMessage().getFormattedMessage();
-    String cleanedmsg = CleanedUpMsg(formattedmsg);
-    String logmsg = "[" + formattedtime + "] " +
-      "[" + logname + "] " +
-      cleanedmsg;
-    
-		if (logmsg.isBlank())
-			return new String[]{};
-		
-    return CollectionUtils.array(logmsg);
+  protected String [] get(final Event e) {
+    return CollectionUtils.array(((LogEvt) e).getLogEvent().getMessage().getFormattedMessage());
   }
   
   @Override
@@ -74,12 +49,12 @@ public class ExprLogMessage extends SimpleExpression<String> {
   }
   
   @Override
-  public @NotNull Class<? extends String> getReturnType() {
+  public Class<? extends String> getReturnType() {
     return String.class;
   }
   
   @Override
-  public @NotNull String toString(final @Nullable Event e, final boolean debug) {
+  public String toString(final @Nullable Event e, final boolean debug) {
     return "logged message";
   }
   
