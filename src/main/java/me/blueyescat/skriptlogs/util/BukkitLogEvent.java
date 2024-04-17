@@ -1,7 +1,7 @@
 package me.blueyescat.skriptlogs.util;
 
 import org.apache.logging.log4j.core.LogEvent;
-import org.apache.logging.log4j.message.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
@@ -9,13 +9,16 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Blueyescat, Equipable
  */
-public class LogEvt extends Event {
+public class BukkitLogEvent extends Event {
   
   private static final HandlerList handlers = new HandlerList();
   private final LogEvent logEvent;
+  private final String message;
   
-  public LogEvt(final LogEvent e, final Message msg) {
+  public BukkitLogEvent(final LogEvent e, final String message) {
+    super(!Bukkit.isPrimaryThread());
     logEvent = e;
+    this.message = message;
   }
   
   public static HandlerList getHandlerList() {
@@ -34,4 +37,9 @@ public class LogEvt extends Event {
   public long getTimeMillis() {
     return System.currentTimeMillis();
   }
+
+  public String getMessage() {
+    return message;
+  }
+
 }

@@ -11,7 +11,7 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
-import me.blueyescat.skriptlogs.util.LogEvt;
+import me.blueyescat.skriptlogs.util.BukkitLogEvent;
 import org.apache.logging.log4j.spi.StandardLevel;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
@@ -37,7 +37,7 @@ public class ExprLogLevel extends SimpleExpression<StandardLevel> {
   
   @Override
   protected StandardLevel @NotNull [] get(final @NotNull Event e) {
-    return CollectionUtils.array(((LogEvt) e).getLogEvent().getLevel().getStandardLevel());
+    return CollectionUtils.array(((BukkitLogEvent) e).getLogEvent().getLevel().getStandardLevel());
   }
   
   @Override
