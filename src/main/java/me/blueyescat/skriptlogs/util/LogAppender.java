@@ -1,55 +1,58 @@
 package me.blueyescat.skriptlogs.util;
 
+import ch.njol.skript.util.SkriptColor;
+import ch.njol.util.StringUtils;
 import me.blueyescat.skriptlogs.SkriptLogs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
 import org.bukkit.Bukkit;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
 /**
- * @author Blueyescat, Equipable
- */
+* @author Blueyescat, Equipable
+*/
 public class LogAppender extends AbstractAppender {
-  
+
   public LogAppender() {
-    super("skript-logs", null, null, false);
-    Logger rootLogger = (Logger) LogManager.getRootLogger();
-    rootLogger.addAppender(this);
+      super("skript-logs", null, null, false);
+      Logger rootLogger = (Logger) LogManager.getRootLogger();
+      rootLogger.addAppender(this);
   }
-  
-  private static final Pattern COLORED_MESSAGE_PATTERN = Pattern.compile("([§&])([0-9A-Fa-fk-orx]|#([0-9A-Fa-f]{6}))");
-  
-  private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-  
-  @Override
-  public void append(LogEvent e) {
-    if (!SkriptLogs.getInstance().isEnabled())
-      return;
-    LogEvt logEvent = new LogEvt(e.toImmutable(), e.getMessage());
-    new BukkitRunnable() {
-      @Override
-      public void run() {
-        LogEvt logEvent = (LogEvt) e;
-        String formattedtime = LocalDateTime.now().format(formatter);
-        String logname = logEvent.getLogEvent().getLoggerName();
-        String formattedmsg = logEvent.getLogEvent().getMessage().getFormattedMessage();
-        String cleanedmsg = COLORED_MESSAGE_PATTERN.matcher(formattedmsg).replaceAll("");
-        String logMessage = "[" + formattedtime + "] " +
-          "[" + logname + "] " +
-          cleanedmsg;
-        
-        Bukkit.getServer().getPluginManager().callEvent(logEvent);
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    @Override
+    public void append(LogEvent e) {
+        if (!SkriptLogs.getInstance().isEnabled())
+            return;
+        String formattedTime = LocalDateTime.now().format(formatter);
+        String formattedMsg = strip(e.getMessage().getFormattedMessage());
+        String logMessage = "[" + formattedTime + "] " + "[" + e.getLoggerName() + "] " + formattedMsg;
+        Bukkit.getPluginManager().callEvent(new BukkitLogEvent(e, logMessage));
         SkriptLogs.getInstance().lastMessage = logMessage;
-        
-      }
-    }.runTask(SkriptLogs.getInstance());
-  }
-  
+    }
+
+    private static final Pattern HEX_PATTERN = Pattern.compile("(?i)&x((?:&\\p{XDigit}){6})");
+
+    /**
+     * @param input string
+     * @return the color stripped string
+     * @author <a href="https://github.com/SkriptLang/Skript/blob/master/src/main/java/ch/njol/skript/expressions/ExprRawString.java">Skript's ExprRawString</a>
+     */
+    private static String strip(String input) {
+
+        String raw = SkriptColor.replaceColorChar(input);
+        if (raw.toLowerCase().contains("&x")) {
+            raw = StringUtils.replaceAll(raw, HEX_PATTERN, matchResult ->
+                    "<#" + matchResult.group(1).replace("&", "") + '>');
+        }
+        return raw;
+    }
+
 }
 

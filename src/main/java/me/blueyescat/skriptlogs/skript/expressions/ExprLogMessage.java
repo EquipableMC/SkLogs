@@ -11,10 +11,9 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import ch.njol.util.coll.CollectionUtils;
-import me.blueyescat.skriptlogs.util.LogEvt;
+import me.blueyescat.skriptlogs.util.BukkitLogEvent;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Blueyescat, Equipable
@@ -31,8 +30,8 @@ public class ExprLogMessage extends SimpleExpression<String> {
   
   @Override
   public boolean init(final Expression<?>[] exprs, final int matchedPattern, final Kleenean isDelayed, final ParseResult parseResult) {
-    if (!getParser().isCurrentEvent(LogEvt.class)) {
-      Skript.error("The logged message expression can't be used outside of an on log event! Use last logged message if you want to use logged messages outside of an on log event!");
+    if (!getParser().isCurrentEvent(BukkitLogEvent.class)) {
+      Skript.error("The 'logged message' expression can't be used outside of an on log event! Use 'last logged message' if you want to use logged messages outside of an on log event!");
       return false;
     }
     return true;
@@ -40,7 +39,7 @@ public class ExprLogMessage extends SimpleExpression<String> {
   
   @Override
   protected String [] get(final Event e) {
-    return CollectionUtils.array(((LogEvt) e).getLogEvent().getMessage().getFormattedMessage());
+    return CollectionUtils.array(((BukkitLogEvent) e).getMessage());
   }
   
   @Override
