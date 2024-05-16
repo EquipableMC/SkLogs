@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
+import org.apache.logging.log4j.core.config.Property;
 import org.bukkit.Bukkit;
 
 import java.time.LocalDateTime;
@@ -19,7 +20,7 @@ import java.util.regex.Pattern;
 public class LogAppender extends AbstractAppender {
 
   public LogAppender() {
-      super("skript-logs", null, null, false);
+      super("skript-logs", null, null, false, Property.EMPTY_ARRAY);
       Logger rootLogger = (Logger) LogManager.getRootLogger();
       rootLogger.addAppender(this);
   }
