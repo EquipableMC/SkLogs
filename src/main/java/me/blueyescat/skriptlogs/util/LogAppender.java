@@ -1,7 +1,7 @@
 package me.blueyescat.skriptlogs.util;
 
 import ch.njol.skript.util.SkriptColor;
-import ch.njol.util.StringUtils;
+import java.util.regex.Matcher;
 import me.blueyescat.skriptlogs.SkriptLogs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LogEvent;
@@ -9,6 +9,7 @@ import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
 import org.apache.logging.log4j.core.config.Property;
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -39,20 +40,37 @@ public class LogAppender extends AbstractAppender {
     }
 
     private static final Pattern HEX_PATTERN = Pattern.compile("(?i)&x((?:&\\p{XDigit}){6})");
+    private static final Pattern COLOR_CODE_PATTERN = Pattern.compile("(?i)&[0-9A-FK-OR]");
+    private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
 
     /**
-     * @param input string
-     * @return the color stripped string
-     * @author <a href="https://github.com/SkriptLang/Skript/blob/master/src/main/java/ch/njol/skript/expressions/ExprRawString.java">Skript's ExprRawString</a>
+     * Strips all color codes, including hex color codes, from the input string.
+     *
+     * @param input the string to process
+     * @return the color-stripped string
      */
     private static String strip(String input) {
-
-        String raw = SkriptColor.replaceColorChar(input);
-        if (raw.toLowerCase().contains("&x")) {
-            raw = StringUtils.replaceAll(raw, HEX_PATTERN, matchResult ->
-                    "<#" + matchResult.group(1).replace("&", "") + '>');
+        // hex
+        Matcher hexMatcher = HEX_PATTERN.matcher(input);
+        StringBuffer hexBuffer = new StringBuffer();
+        while (hexMatcher.find()) {
+            hexMatcher.appendReplacement(hexBuffer, "");
         }
-        return raw;
+        hexMatcher.appendTail(hexBuffer);
+
+        // color codes
+        Matcher colorCodeMatcher = COLOR_CODE_PATTERN.matcher(hexBuffer.toString());
+        StringBuffer colorCodeBuffer = new StringBuffer();
+        while (colorCodeMatcher.find()) {
+            colorCodeMatcher.appendReplacement(colorCodeBuffer, "");
+        }
+        colorCodeMatcher.appendTail(colorCodeBuffer);
+
+        // whitespace
+        String stripped = colorCodeBuffer.toString().trim();
+        stripped = WHITESPACE_PATTERN.matcher(stripped).replaceAll("");
+
+        return stripped;
     }
 
 }
