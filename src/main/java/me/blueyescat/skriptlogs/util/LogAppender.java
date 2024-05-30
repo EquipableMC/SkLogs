@@ -1,6 +1,5 @@
 package me.blueyescat.skriptlogs.util;
 
-import ch.njol.skript.util.SkriptColor;
 import java.util.regex.Matcher;
 import me.blueyescat.skriptlogs.SkriptLogs;
 import org.apache.logging.log4j.LogManager;
@@ -9,7 +8,6 @@ import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
 import org.apache.logging.log4j.core.config.Property;
 import org.bukkit.Bukkit;
-import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,8 +38,10 @@ public class LogAppender extends AbstractAppender {
     }
 
     private static final Pattern HEX_PATTERN = Pattern.compile("(?i)&x((?:&\\p{XDigit}){6})");
-    private static final Pattern COLOR_CODE_PATTERN = Pattern.compile("(?i)&[0-9A-FK-OR]");
+    private static final Pattern COLOR_CODE_PATTERN = Pattern.compile("(?i)[&§][0-9A-FK-OR]");
+    private static final Pattern ANSI_ESCAPE_PATTERN = Pattern.compile("\\u001B\\[[;\\d]*m");
     private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
+    private static final Pattern BUNGEE_COLOR_CODE_PATTERN = Pattern.compile("(?i)" + String.valueOf('§') + "[0-9A-FK-ORX]");
 
     /**
      * Strips all color codes, including hex color codes, from the input string.
@@ -58,7 +58,7 @@ public class LogAppender extends AbstractAppender {
         }
         hexMatcher.appendTail(hexBuffer);
 
-        // color codes
+        // Color Codes
         Matcher colorCodeMatcher = COLOR_CODE_PATTERN.matcher(hexBuffer.toString());
         StringBuffer colorCodeBuffer = new StringBuffer();
         while (colorCodeMatcher.find()) {
@@ -66,9 +66,25 @@ public class LogAppender extends AbstractAppender {
         }
         colorCodeMatcher.appendTail(colorCodeBuffer);
 
+        // Bungee Color Codes
+        Matcher bungeeColorCodeMatcher = BUNGEE_COLOR_CODE_PATTERN.matcher(colorCodeBuffer.toString());
+        StringBuffer bungeeColorCodeBuffer = new StringBuffer();
+        while (bungeeColorCodeMatcher.find()) {
+            bungeeColorCodeMatcher.appendReplacement(bungeeColorCodeBuffer, "");
+        }
+        colorCodeMatcher.appendTail(bungeeColorCodeBuffer);
+
+        // ANSI
+        Matcher ansiEscapeMatcher = ANSI_ESCAPE_PATTERN.matcher(bungeeColorCodeBuffer.toString());
+        StringBuffer ansiBuffer = new StringBuffer();
+        while (ansiEscapeMatcher.find()) {
+            ansiEscapeMatcher.appendReplacement(ansiBuffer, "");
+        }
+        ansiEscapeMatcher.appendTail(ansiBuffer);
+
         // whitespace
-        String stripped = colorCodeBuffer.toString().trim();
-        stripped = WHITESPACE_PATTERN.matcher(stripped).replaceAll("");
+        String stripped = ansiBuffer.toString().trim();
+        stripped = WHITESPACE_PATTERN.matcher(stripped).replaceAll(" ");
 
         return stripped;
     }
