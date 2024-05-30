@@ -38,10 +38,10 @@ public class LogAppender extends AbstractAppender {
     }
 
     private static final Pattern HEX_PATTERN = Pattern.compile("(?i)&x((?:&\\p{XDigit}){6})");
-    private static final Pattern COLOR_CODE_PATTERN = Pattern.compile("(?i)[&§][0-9A-FK-OR]");
+    private static final Pattern COLOR_CODE_PATTERN = Pattern.compile("(?i)[&§][0-9A-FK-ORX]");
     private static final Pattern ANSI_ESCAPE_PATTERN = Pattern.compile("\\u001B\\[[;\\d]*m");
     private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
-    private static final Pattern BUNGEE_COLOR_CODE_PATTERN = Pattern.compile("(?i)" + String.valueOf('§') + "[0-9A-FK-ORX]");
+    private static final Pattern BUNGEE_CODE_PATTERN = Pattern.compile("(?i)" + String.valueOf('§'));
 
     /**
      * Strips all color codes, including hex color codes, from the input string.
@@ -67,7 +67,7 @@ public class LogAppender extends AbstractAppender {
         colorCodeMatcher.appendTail(colorCodeBuffer);
 
         // Bungee Color Codes
-        Matcher bungeeColorCodeMatcher = BUNGEE_COLOR_CODE_PATTERN.matcher(colorCodeBuffer.toString());
+        Matcher bungeeColorCodeMatcher = BUNGEE_CODE_PATTERN.matcher(colorCodeBuffer.toString());
         StringBuffer bungeeColorCodeBuffer = new StringBuffer();
         while (bungeeColorCodeMatcher.find()) {
             bungeeColorCodeMatcher.appendReplacement(bungeeColorCodeBuffer, "");
