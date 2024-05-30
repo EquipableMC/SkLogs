@@ -36,9 +36,8 @@ public class LogAppender extends AbstractAppender {
         Bukkit.getPluginManager().callEvent(new BukkitLogEvent(e, logMessage));
         SkriptLogs.getInstance().lastMessage = logMessage;
     }
-
-    private static final Pattern HEX_PATTERN = Pattern.compile("(?i)&x((?:&\\p{XDigit}){6})");
-    private static final Pattern COLOR_CODE_PATTERN = Pattern.compile("(?i)[&§][0-9A-FK-ORX]");
+    private static final Pattern HEX_PATTERN = Pattern.compile("&x((?:&\\p{XDigit}){6})");
+    private static final Pattern COLOR_CODE_PATTERN = Pattern.compile("[&§][0-9A-FK-ORX]");
     private static final Pattern ANSI_ESCAPE_PATTERN = Pattern.compile("\\u001B\\[[;\\d]*m");
     private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
     private static final Pattern BUNGEE_CODE_PATTERN = Pattern.compile("(?i)" + String.valueOf('§'));
