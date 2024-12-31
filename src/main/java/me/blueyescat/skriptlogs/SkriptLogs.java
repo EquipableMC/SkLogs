@@ -60,7 +60,7 @@ public class SkriptLogs extends JavaPlugin {
       Skript.getInstance().getDescription().getVersion()));
     getLogger().info("Started metrics!");
     getLogger().info("Finished loading!");
-    UpdateChecker.check(this);
+    new UpdateChecker(this);
   }
   
 }

@@ -18,58 +18,55 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author Blueyescat
+ * Logs a message with the given log level. The last pattern uses 'info' level.
  */
 @Name("Log Message")
 @Description({"Logs a message with the given log level. The last pattern uses 'info' level."})
 @Examples({"log a warning \"test\"",
-  "log errors \"test\" and \"error\"",
-  "send a fatal error \"test\" to the console",
-  "print in \"test\""})
+        "log errors \"test\" and \"error\"",
+        "send a fatal error \"test\" to the console",
+        "print in \"test\""})
 @Since("1.0.0")
 public class EffLogMessage extends Effect {
-  
+
   static {
     Skript.registerEffect(EffLogMessage.class,
-      "(log|print [in]) %loglevel% [[with [the]] message[s]] %strings%",
-      "send %loglevel% [[with [the]] message[s]] %strings% to [the] console",
-      "print [in] %strings%");
+            "(log|print [in]) %loglevel% [[with [the]] message[s]] %strings%",
+            "send %loglevel% [[with [the]] message[s]] %strings% to [the] console",
+            "print [in] %strings%");
   }
-  
-  @SuppressWarnings("null")
+
   private Expression<StandardLevel> logLevel;
-  
-  @SuppressWarnings("null")
   private Expression<String> messages;
-  
   private boolean usedPrint;
-  
+
   @Override
-  @SuppressWarnings("unchecked")
   public boolean init(final Expression<?> @NotNull [] exprs, final int matchedPattern, final @NotNull Kleenean isDelayed, final @NotNull ParseResult parser) {
     usedPrint = matchedPattern == 2;
-    if (!usedPrint)
+    if (!usedPrint) {
       logLevel = (Expression<StandardLevel>) exprs[0];
+    }
     messages = (Expression<String>) exprs[usedPrint ? 0 : 1];
     return true;
   }
-  
+
   @Override
-  protected void execute(final @NotNull Event e) {
-    if ((logLevel == null && !usedPrint) || messages == null)
-      return;
+  protected void execute(final @NotNull Event event) {
+    if ((logLevel == null && !usedPrint) || messages == null) return;
+
     Logger logger = LogManager.getRootLogger();
-    Level level = usedPrint ? Level.INFO : Level.valueOf(logLevel.getSingle(e).toString());
-    for (String message : messages.getArray(e))
+    Level level = usedPrint ? Level.INFO : Level.valueOf(logLevel.getSingle(event).toString());
+    for (String message : messages.getArray(event)) {
       logger.log(level, message);
+    }
   }
-  
+
   @Override
-  public @NotNull String toString(final @Nullable Event e, final boolean debug) {
-    if (usedPrint)
-      return "print " + messages.toString(e, debug);
-    else
-      return "log " + logLevel.toString(e, debug) + " message " + messages.toString(e, debug);
+  public @NotNull String toString(final @Nullable Event event, final boolean debug) {
+    if (usedPrint) {
+      return "print " + messages.toString(event, debug);
+    } else {
+      return "log " + logLevel.toString(event, debug) + " message " + messages.toString(event, debug);
+    }
   }
-  
 }

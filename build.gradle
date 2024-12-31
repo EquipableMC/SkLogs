@@ -27,9 +27,9 @@ processResources {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT'
-    compileOnly 'com.github.SkriptLang:Skript:2.7.0'
-    compileOnly 'org.apache.logging.log4j:log4j-core:2.23.1'
+    compileOnly 'io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT'
+    compileOnly 'com.github.SkriptLang:Skript:2.9.5'
+    compileOnly 'org.apache.logging.log4j:log4j-core:2.24.2'
     implementation 'org.bstats:bstats-bukkit:3.0.2'
 }
 
@@ -38,6 +38,22 @@ shadowJar {
     relocate 'org.bstats', 'me.blueyescat.skriptlogs.bstats'
 }
 
+def latestJava = 21
+def oldestJava = 17
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-source', '' + oldestJava, '-target', '' + oldestJava]
+}
+
 build {
     dependsOn(shadowJar)
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.compilerArgs.add("-Xlint:unchecked")
+            options.compilerArgs.add("-Xlint:deprecation")
+        }
+    }
 }
