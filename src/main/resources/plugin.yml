@@ -3,6 +3,6 @@ main: me.blueyescat.skriptlogs.SkriptLogs
 description: An updated fork of Skript-logs
 api-version: 1.13
 version: @version@
-authors: [ ImNotStable, Equipable, Blueyescat ]
+authors: [Equipable, Blueyescat ]
 depend: [ Skript ]
 website: https://github.com/EquipableMC/SkLogs

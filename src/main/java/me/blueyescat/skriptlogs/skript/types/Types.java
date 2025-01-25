@@ -1,4 +1,4 @@
-package me.blueyescat.skriptlogs.skript;
+package me.blueyescat.skriptlogs.skript.types;
 
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
@@ -22,7 +22,7 @@ public class Types {
       .user("log ?levels?")
       .name("Log Level")
       .description("")
-      .usage("info, warning, error, fatal, trace, debug, off, all")
+      .usage("info, warning, error, fatal, trace, debug, all")
       .examples("")
       .since("1.0.0")
       .defaultExpression(new EventValueExpression<>(StandardLevel.class))
