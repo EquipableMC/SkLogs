@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 
 public class Utilities {
 
-    public static final String PLUGIN_PREFIX = ChatColor.of("#1F51FF") + "[SkLogs]" + ChatColor.RESET;
+    public static final String PLUGIN_PREFIX = ChatColor.of("#5555FF") + "[SkLogs]" + ChatColor.RESET;
     private static final boolean SKRIPT_EXISTS = Bukkit.getPluginManager().getPlugin("Skript") != null;
     private static final java.util.regex.Pattern HEX_PATTERN = java.util.regex.Pattern.compile("<#([A-Fa-f\\d]){6}>");
 
