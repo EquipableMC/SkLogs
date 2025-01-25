@@ -10,7 +10,7 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import me.blueyescat.skriptlogs.SkriptLogs;
+import me.blueyescat.skriptlogs.SkLogs;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +35,7 @@ public class ExprLastLogMessage extends SimpleExpression<String> {
   
   @Override
   protected String @NotNull [] get(final @NotNull Event e) {
-    return new String[]{SkriptLogs.getInstance().lastMessage};
+    return new String[]{SkLogs.getInstance().lastMessage};
   }
   
   @Override

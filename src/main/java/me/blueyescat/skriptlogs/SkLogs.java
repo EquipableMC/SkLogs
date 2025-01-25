@@ -10,13 +10,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 
-public class SkriptLogs extends JavaPlugin {
+public class SkLogs extends JavaPlugin {
   
-  private static SkriptLogs instance;
+  private static SkLogs instance;
   private static SkriptAddon addonInstance;
   public String lastMessage;
   
-  public SkriptLogs() {
+  public SkLogs() {
     if (instance == null) {
       instance = this;
     } else {
@@ -24,7 +24,7 @@ public class SkriptLogs extends JavaPlugin {
     }
   }
   
-  public static SkriptLogs getInstance() {
+  public static SkLogs getInstance() {
     if (instance == null) {
       throw new IllegalStateException();
     }

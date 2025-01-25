@@ -1,5 +1,5 @@
 name: SkLogs
-main: me.blueyescat.skriptlogs.SkriptLogs
+main: me.blueyescat.skriptlogs.SkLogs
 description: An updated fork of Skript-logs
 api-version: 1.13
 version: @version@

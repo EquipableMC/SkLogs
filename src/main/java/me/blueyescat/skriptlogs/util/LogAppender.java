@@ -1,6 +1,6 @@
 package me.blueyescat.skriptlogs.util;
 
-import me.blueyescat.skriptlogs.SkriptLogs;
+import me.blueyescat.skriptlogs.SkLogs;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LogEvent;
@@ -44,7 +44,7 @@ public class LogAppender extends AbstractAppender {
         String logMessage = "[" + formattedTime + " " + loglevel + "] " + "[" + loggerName + "] " + cleanedLogMsg;
 
         Bukkit.getPluginManager().callEvent(new BukkitLogEvent(logEvent, logMessage));
-        SkriptLogs.getInstance().lastMessage = logMessage;
+        SkLogs.getInstance().lastMessage = logMessage;
 
 
     }
