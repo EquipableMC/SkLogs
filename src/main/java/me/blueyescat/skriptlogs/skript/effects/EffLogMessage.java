@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
  */
 @Name("Log Message")
 @Description({"Logs a message with the given log level. The last pattern uses 'info' level."})
-@Examples({"log \"test\""})
+@Examples({"log \"test\" with a severity of warning to the console"})
 @Since("1.0.0")
 public class EffLogMessage extends Effect {
 

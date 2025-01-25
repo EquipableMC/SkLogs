@@ -7,4 +7,4 @@ log levels:
     info: info log, log info
     off: log off, no log
     trace: log trace, trace log
-    warn: warn log, log warn, warning log, log warning
+    warning: warning log, log warning
